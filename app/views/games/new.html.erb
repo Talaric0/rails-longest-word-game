@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longest word game</title>
+</head>
+<body>
+  
+  <div class="container">
+    <h1>New Game</h1>
+    
+    <div class="array">
+      <ul>
+        <% @letters.each do |letter| %>
+          <li> <%= letter %> </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <form action="/score" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag "TimeStampInitial", Time.now %>
+      <%= hidden_field_tag "letters", @letters %>
+      <input type="text" name="word">
+      <input type="submit" value="Score">
+    </form>
+
+  </div>
+
+
+</body>
+</html>
