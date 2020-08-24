@@ -9,6 +9,11 @@
 
   <h1>Here is you Score...</h1>
 
+  <h2> Your Word: <%= @word %> </h2>
+  <h3> Time taken to answer: <%= @result[:time] %> </h3>
+  <h3> Your Score: <%= @result[:score] %> </h3>
+  <h4> <%= @result[:message] %> </h4>
   <%= link_to "New game", "new" %>
+  
 </body>
 </html>

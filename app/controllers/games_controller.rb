@@ -15,7 +15,6 @@ class GamesController < ApplicationController
     @letters = params[:letters]
     @init_time = params[:TimeStampInitial].to_i
     @final_time = Time.now.to_i
-
     attempt_array = @word.split(//)
     validated_on_grid = attempt_array.all? { |char| @word.count(char) <= @letters.count(char.upcase) }
     
@@ -24,11 +23,12 @@ class GamesController < ApplicationController
 
     validated_on_dictionary = dictionary_api_result["found"]
 
-    result = {}
-    result[:time] = @final_time - @init_time
-    result[:score] = attempt_array.size + (1 / result[:time]) if validated_on_dictionary && validated_on_grid
-    result[:message] = message_builder(result[:score], validated_on_dictionary, validated_on_grid)
-    result
+    @result = {}
+    @result[:time] = @final_time - @init_time
+    @result[:score] = 0
+    @result[:score] = attempt_array.size + (1.0 / @result[:time]) if validated_on_dictionary && validated_on_grid
+    @result[:message] = message_builder(@result[:score], validated_on_dictionary, validated_on_grid)
+    @result
   end
 
   def message_builder(score, english, grid_check)
